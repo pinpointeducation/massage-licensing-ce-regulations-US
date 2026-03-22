@@ -387,17 +387,11 @@ document.addEventListener('click', e => {
 });
 
 function sendResize() {
-  var h = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-  window.parent.postMessage({ type: 'ce-tool-resize', height: h }, '*');
+  setTimeout(() => {
+    window.parent.postMessage({ type: 'ce-tool-resize', height: document.body.scrollHeight }, '*');
+  }, 120);
 }
-// Fire multiple times to catch slow renders
-sendResize();
-setTimeout(sendResize, 100);
-setTimeout(sendResize, 300);
-setTimeout(sendResize, 800);
-setTimeout(sendResize, 1500);
 window.addEventListener('load', sendResize);
-window.addEventListener('resize', sendResize);
 </script>
 </body>
 </html>
